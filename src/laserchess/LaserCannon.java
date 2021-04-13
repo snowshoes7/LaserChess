@@ -27,4 +27,10 @@ public class LaserCannon extends Piece {
 		//Can't die so don't do anything
 		System.out.println("This piece cannot die since it is a LaserCannon");
 	}
+	
+	public void fire() {
+		int[] rc = {super.getRow(), super.getColumn()};
+		super.getBoard().setLaserPosition(rc);
+		super.getBoard().getLaserObject().setActive(true);
+	}
 }

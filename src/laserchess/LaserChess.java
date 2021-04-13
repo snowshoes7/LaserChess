@@ -69,7 +69,7 @@ public class LaserChess extends PApplet {
 		laserCannon3 = loadImage("laserCannon3.png");
 		
 		//SET UP
-		mainBoard.setTile(new Tile(new King(0, 0, 0, "red", mainBoard)), 0, 0);
+		mainBoard.setTile(new Tile(new LaserCannon(0, 0, 0, "red", mainBoard)), 0, 0);
 	}
 	
 	public void drawBoard() {
@@ -127,6 +127,9 @@ public class LaserChess extends PApplet {
 		if (keyCode == 's') {
 			//Toggle game stopped manually
 			mainBoard.setPlayingGame(!(mainBoard.isPlayingGame()));
+		}
+		if (keyCode == 'f') {
+			((LaserCannon)(mainBoard.getTile(0, 0).getPiece())).fire();
 		}
 	}
 	

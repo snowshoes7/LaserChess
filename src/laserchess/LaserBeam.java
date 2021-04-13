@@ -12,11 +12,13 @@ public class LaserBeam {
 	 */
 	private boolean doesNextTileContainPiece;
 	private boolean nextMoveLegal;
+	private boolean isActive;
 	
 	public LaserBeam(int roww, int col, int dir) {
 		this.row = roww;
 		this.column = col;
 		this.direction = dir;
+		this.isActive = false;
 	}
 	
 	public void checkNextTile() {
@@ -33,6 +35,14 @@ public class LaserBeam {
 	
 	public int getRow() {
 		return this.row;
+	}
+	
+	public boolean isActive() {
+		return this.isActive;
+	}
+	
+	public void setActive(boolean b) {
+		this.isActive = b;
 	}
 	
 	public int getColumn() {

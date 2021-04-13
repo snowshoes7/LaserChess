@@ -27,6 +27,15 @@ public class Board {
 		return toReturn;
 	}
 	
+	public void setLaserPosition(int[] rowcol) {
+		laser.setRow(rowcol[0]);
+		laser.setColumn(rowcol[1]);
+	}
+	
+	public LaserBeam getLaserObject() {
+		return this.laser;
+	}
+	
 	public boolean isPlayingGame() {
 		return this.isPlayingGame;
 	}
