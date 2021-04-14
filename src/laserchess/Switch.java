@@ -20,6 +20,7 @@ public class Switch extends Piece {
 		} else if (super.getDirection() == 3) {
 			super.setIcon(LaserChess.switch3);
 		}
+		toReturn = super.getIcon();
 		return toReturn;
 	}
 }

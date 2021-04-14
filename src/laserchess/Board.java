@@ -7,7 +7,7 @@ public class Board {
 	
 	public Board() {
 		board = new Tile[8][10];
-		//laser = new LaserBeam();
+		laser = new LaserBeam(0, 0, 0, this);
 	}
 	
 	public Tile[][] getBoard() {

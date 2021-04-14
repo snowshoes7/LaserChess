@@ -20,6 +20,7 @@ public class LaserCannon extends Piece {
 		} else if (super.getDirection() == 3) {
 			super.setIcon(LaserChess.laserCannon3);
 		}
+		toReturn = super.getIcon();
 		return toReturn;
 	}
 	
@@ -31,6 +32,8 @@ public class LaserCannon extends Piece {
 	public void fire() {
 		int[] rc = {super.getRow(), super.getColumn()};
 		super.getBoard().setLaserPosition(rc);
+		super.getBoard().getLaserObject().setDirection(super.getDirection());
 		super.getBoard().getLaserObject().setActive(true);
+		System.out.println("Fire recieved");
 	}
 }

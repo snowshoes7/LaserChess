@@ -20,6 +20,7 @@ public class Deflector extends Piece {
 		} else if (super.getDirection() == 3) {
 			super.setIcon(LaserChess.deflector3);
 		}
+		toReturn = super.getIcon();
 		return toReturn;
 	}
 }

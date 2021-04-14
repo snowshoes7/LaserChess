@@ -20,6 +20,7 @@ public class Defender extends Piece {
 		} else if (super.getDirection() == 3) {
 			super.setIcon(LaserChess.defender3);
 		}
+		toReturn = super.getIcon();
 		return toReturn;
 	}
 	
