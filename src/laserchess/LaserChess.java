@@ -92,7 +92,8 @@ public class LaserChess extends PApplet {
 		mainBoard.setTile(new Tile(new LaserCannon(5, 0, 0, "red", mainBoard)), 5, 0);
 		mainBoard.setTile(new Tile(new King(0, 7, 0, "blue", mainBoard)), 0, 7);
 		mainBoard.setTile(new Tile(new Deflector(5, 9, 2, "blue", mainBoard)), 5, 9);
-		mainBoard.setTile(new Tile(new Switch(3, 9, 0, "blue", mainBoard)), 3, 9);
+		mainBoard.setTile(new Tile(new Switch(3, 9, 1, "blue", mainBoard)), 3, 9);
+		mainBoard.setTile(new Tile(new Defender(3, 0, 0, "blue", mainBoard)), 3, 0);
 	}
 	
 	public void drawBoard() {
@@ -119,11 +120,17 @@ public class LaserChess extends PApplet {
 				if (!(drawLaserOnly)) {
 					if ((mainBoard.getTile(row, col) != null) && (mainBoard.getTile(row, col).hasAnyPiece())) { //null check must go first, otherwise we risk a NullPointerException
 						if (!(mainBoard.getTile(row, col).getPiece().isDead())) {
+							if (mainBoard.getTile(row, col).getPiece().getColor().equals("blue")) {
+								tint(0, 100, 204);
+							} else {
+								tint(204, 100, 0);
+							}
 							image(mainBoard.getTile(row, col).getPiece().getIcon(), baseRowLoc + 14, baseColLoc + 5, 75, 60);
 						}
 					}
 				} else {
 					if (mainBoard.getLaserObject().isActive() && mainBoard.getLaserPosition()[0] == row && mainBoard.getLaserPosition()[1] == col) {
+						tint(255, 255, 255);
 						image(mainBoard.getLaserObject().getIcon(), baseRowLoc + 14, baseColLoc + 5, 75, 60);
 						//System.out.println("Rendered laser at" + row + " " + col);
 					}

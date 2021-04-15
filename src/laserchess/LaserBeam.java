@@ -192,6 +192,11 @@ public class LaserBeam {
 								//Kill the piece (done in the deflector class)
 							}
 						}
+					} else if (thePieceIAmOn.getType().equals("Defender")) {
+						if ((thePieceIAmOn.getDirection() + 6) % 4 == this.getDirection()) {
+							this.setActive(false);
+							System.out.println("Block");
+						}
 					}
 				} else {
 					//System.out.println("Dead piece");

@@ -29,6 +29,8 @@ public class Defender extends Piece {
 	}
 	
 	public void dieCheck() {
-		super.setDead(true);
+		if (super.getBoard().getLaserPosition()[0] == super.getRow() && super.getBoard().getLaserPosition()[1] == super.getColumn() && super.getBoard().getLaserObject().isActive()) {
+			super.setDead(true);
+		}
 	}
 }
