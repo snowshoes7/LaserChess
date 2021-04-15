@@ -27,7 +27,7 @@ public class LaserBeam {
 		this.board = theBoard;
 	}
 	
-	public void checkNextTile() {
+	private void checkNextTile() {
 		if ((this.getBoard().getTile(this.getRow(), this.getColumn()) == null) || (!(this.getBoard().getTile(this.getRow(), this.getColumn()).hasAnyPiece()))) {
 			if (direction == 0) {
 				if (this.getColumn() == this.board.getBoard()[0].length - 1) {
@@ -59,7 +59,7 @@ public class LaserBeam {
 		}
 	}
 	
-	public void checkThisTile() {
+	private void checkThisTile() {
 		if (this.getRow() >= 0 && this.getColumn() >= 0 && this.getRow() < 8 && this.getColumn() < 10) {
 			if (this.getBoard().getTile(getRow(), getColumn()) != null && this.getBoard().getTile(getRow(), getColumn()).hasAnyPiece()) {
 				Piece thePieceIAmOn = this.getBoard().getTile(this.getBoard().getLaserPosition()[0], this.getBoard().getLaserPosition()[1]).getPiece();
@@ -117,23 +117,23 @@ public class LaserBeam {
 							}
 						}
 					} else if (thePieceIAmOn.getType().equals("Switch")) {
-						if (thePieceIAmOn.getDirection() == 0 || thePieceIAmOn.getDirection() == 2) {
+						if (thePieceIAmOn.getDirection() == 1 || thePieceIAmOn.getDirection() == 3) {
 							if (this.getDirection() == 1) {
-								this.setDirection(0);
+								this.setDirection(2);
 							} else if (this.getDirection() == 0) {
 								this.setDirection(3);
 							} else if (this.getDirection() == 3) {
-								this.setDirection(2);
+								this.setDirection(0);
 							} else if (this.getDirection() == 2) {
 								this.setDirection(1);
 							}
-						} else if (thePieceIAmOn.getDirection() == 1 || thePieceIAmOn.getDirection() == 3) {
+						} else if (thePieceIAmOn.getDirection() == 0 || thePieceIAmOn.getDirection() == 2) {
 							if (this.getDirection() == 1) {
-								this.setDirection(2);
+								this.setDirection(0);
 							} else if (this.getDirection() == 0) {
 								this.setDirection(1);
 							} else if (this.getDirection() == 3) {
-								this.setDirection(0);
+								this.setDirection(2);
 							} else if (this.getDirection() == 2) {
 								this.setDirection(3);
 							}
@@ -149,7 +149,7 @@ public class LaserBeam {
 		}
 	}
 	
-	public void checkThisTileBenign() {
+	private void checkThisTileBenign() {
 		if (this.getRow() >= 0 && this.getColumn() >= 0 && this.getRow() < 8 && this.getColumn() < 10) {
 			if (this.getBoard().getTile(getRow(), getColumn()) != null && this.getBoard().getTile(getRow(), getColumn()).hasAnyPiece()) {
 				Piece thePieceIAmOn = this.getBoard().getTile(this.getBoard().getLaserPosition()[0], this.getBoard().getLaserPosition()[1]).getPiece();
