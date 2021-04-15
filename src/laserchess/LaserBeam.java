@@ -28,30 +28,34 @@ public class LaserBeam {
 	}
 	
 	public void checkNextTile() {
-		if (direction == 0) {
-			if (this.getColumn() == this.board.getBoard()[0].length) {
-				this.nextMoveLegal = false;
-			} else {
-				this.nextMoveLegal = true;
+		if ((this.getBoard().getTile(this.getRow(), this.getColumn()) == null) || (!(this.getBoard().getTile(this.getRow(), this.getColumn()).hasAnyPiece()))) {
+			if (direction == 0) {
+				if (this.getColumn() == this.board.getBoard()[0].length - 1) {
+					this.nextMoveLegal = false;
+				} else {
+					this.nextMoveLegal = true;
+				}
+			} else if (direction == 1) {
+				if (this.getRow() == 0) {
+					this.nextMoveLegal = false;
+				} else {
+					this.nextMoveLegal = true;
+				}
+			} else if (direction == 2) {
+				if (this.getColumn() == 0) {
+					this.nextMoveLegal = false;
+				} else {
+					this.nextMoveLegal = true;
+				}
+			} else if (direction == 3) {
+				if (this.getRow() == this.board.getBoard().length - 1) {
+					this.nextMoveLegal = false;
+				} else {
+					this.nextMoveLegal = true;
+				}
 			}
-		} else if (direction == 1) {
-			if (this.getRow() == 0) {
-				this.nextMoveLegal = false;
-			} else {
-				this.nextMoveLegal = true;
-			}
-		} else if (direction == 2) {
-			if (this.getColumn() == 0) {
-				this.nextMoveLegal = false;
-			} else {
-				this.nextMoveLegal = true;
-			}
-		} else if (direction == 3) {
-			if (this.getRow() == this.board.getBoard().length - 1) {
-				this.nextMoveLegal = false;
-			} else {
-				this.nextMoveLegal = true;
-			}
+		} else {
+			this.nextMoveLegal = true;
 		}
 	}
 	
@@ -77,6 +81,7 @@ public class LaserBeam {
 							if (this.getDirection() == 2) {
 								((Deflector)(thePieceIAmOn)).setKillSkip(true);
 								this.setDirection(3);
+								System.out.println("Redirect");
 							} else if (this.getDirection() == 1) {
 								((Deflector)(thePieceIAmOn)).setKillSkip(true);
 								this.setDirection(0);
@@ -232,7 +237,9 @@ public class LaserBeam {
 				}
 				this.checkThisTileBenign();
 			} else {
+				//this.checkNextTile();
 				this.setActive(false);
+				System.out.println("Nextmove illegal?");
 			}
 			moveCountDelay = 0;
 		} else {

@@ -89,11 +89,16 @@ public class LaserChess extends PApplet {
 			}
 		}
 		
-		mainBoard.setTile(new Tile(new LaserCannon(5, 0, 0, "red", mainBoard)), 5, 0);
-		mainBoard.setTile(new Tile(new King(0, 7, 0, "blue", mainBoard)), 0, 7);
-		mainBoard.setTile(new Tile(new Deflector(5, 9, 2, "blue", mainBoard)), 5, 9);
-		mainBoard.setTile(new Tile(new Switch(3, 9, 1, "blue", mainBoard)), 3, 9);
-		mainBoard.setTile(new Tile(new Defender(3, 0, 0, "blue", mainBoard)), 3, 0);
+		mainBoard.setTile(new Tile(new LaserCannon(0, 0, 3, "red", mainBoard)), 0, 0);
+		mainBoard.setTile(new Tile(new Deflector(3, 0, 1, "red", mainBoard)), 3, 0);
+		mainBoard.setTile(new Tile(new Deflector(4, 0, 0, "red", mainBoard)), 4, 0);
+		
+		mainBoard.setTile(new Tile(new Deflector(3, 2, 3, "blue", mainBoard)), 3, 2);
+		mainBoard.setTile(new Tile(new Deflector(4, 2, 2, "blue", mainBoard)), 4, 2);
+		//mainBoard.setTile(new Tile(new King(0, 7, 0, "blue", mainBoard)), 0, 7);
+		//mainBoard.setTile(new Tile(new Deflector(5, 9, 2, "blue", mainBoard)), 5, 9);
+		//mainBoard.setTile(new Tile(new Switch(3, 9, 1, "blue", mainBoard)), 3, 9);
+		//mainBoard.setTile(new Tile(new Defender(3, 0, 0, "blue", mainBoard)), 3, 0);
 	}
 	
 	public void drawBoard() {
@@ -184,7 +189,7 @@ public class LaserChess extends PApplet {
 		}
 		if (key == 'f') {
 			System.out.println("Fire sent");
-			((LaserCannon)(mainBoard.getTile(5, 0).getPiece())).fire();
+			((LaserCannon)(mainBoard.getTile(0, 0).getPiece())).fire();
 		}
 		if (keyCode == ESC) {
 			System.out.println("Quit with ESC");
