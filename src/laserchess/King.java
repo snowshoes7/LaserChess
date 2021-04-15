@@ -24,6 +24,10 @@ public class King extends Piece {
 		return toReturn;
 	}
 	
+	public String getType() {
+		return "King";
+	}
+	
 	public void dieCheck() {
 		if (super.getBoard().getLaserPosition()[0] == super.getRow() && super.getBoard().getLaserPosition()[1] == super.getColumn()) {
 			super.setDead(true);

@@ -55,14 +55,167 @@ public class LaserBeam {
 		}
 	}
 	
+	public void checkThisTile() {
+		if (this.getRow() >= 0 && this.getColumn() >= 0 && this.getRow() < 8 && this.getColumn() < 10) {
+			if (this.getBoard().getTile(getRow(), getColumn()) != null && this.getBoard().getTile(getRow(), getColumn()).hasAnyPiece()) {
+				Piece thePieceIAmOn = this.getBoard().getTile(this.getBoard().getLaserPosition()[0], this.getBoard().getLaserPosition()[1]).getPiece();
+				if (!(thePieceIAmOn.isDead())) {
+					if (thePieceIAmOn.getType().equals("Deflector")) {
+						if (thePieceIAmOn.getDirection() == 1) {
+							if (this.getDirection() == 2) {
+								((Deflector)(thePieceIAmOn)).setKillSkip(true);
+								this.setDirection(1);
+							} else if (this.getDirection() == 3) {
+								((Deflector)(thePieceIAmOn)).setKillSkip(true);
+								this.setDirection(0);
+							} else {
+								((Deflector)(thePieceIAmOn)).setKillSkip(false);
+								//thePieceIAmOn.dieCheck();
+								//Kill the piece (done in the deflector class)
+							}
+						} else if (thePieceIAmOn.getDirection() == 0) {
+							if (this.getDirection() == 2) {
+								((Deflector)(thePieceIAmOn)).setKillSkip(true);
+								this.setDirection(3);
+							} else if (this.getDirection() == 1) {
+								((Deflector)(thePieceIAmOn)).setKillSkip(true);
+								this.setDirection(0);
+							} else {
+								((Deflector)(thePieceIAmOn)).setKillSkip(false);
+								//thePieceIAmOn.dieCheck();
+								//Kill the piece (done in the deflector class)
+							}
+						} else if (thePieceIAmOn.getDirection() == 2) {
+							if (this.getDirection() == 3) {
+								((Deflector)(thePieceIAmOn)).setKillSkip(true);
+								this.setDirection(2);
+							} else if (this.getDirection() == 0) {
+								((Deflector)(thePieceIAmOn)).setKillSkip(true);
+								//System.out.println("Skipping kill");
+								this.setDirection(1);
+							} else {
+								((Deflector)(thePieceIAmOn)).setKillSkip(false);
+								//thePieceIAmOn.dieCheck();
+								//Kill the piece (done in the deflector class)
+							}
+						} else if (thePieceIAmOn.getDirection() == 3) {
+							if (this.getDirection() == 1) {
+								((Deflector)(thePieceIAmOn)).setKillSkip(true);
+								this.setDirection(2);
+							} else if (this.getDirection() == 0) {
+								((Deflector)(thePieceIAmOn)).setKillSkip(true);
+								this.setDirection(3);
+							} else {
+								((Deflector)(thePieceIAmOn)).setKillSkip(false);
+								//thePieceIAmOn.dieCheck();
+								//Kill the piece (done in the deflector class)
+							}
+						}
+					} else if (thePieceIAmOn.getType().equals("Switch")) {
+						if (thePieceIAmOn.getDirection() == 0 || thePieceIAmOn.getDirection() == 2) {
+							if (this.getDirection() == 1) {
+								this.setDirection(0);
+							} else if (this.getDirection() == 0) {
+								this.setDirection(3);
+							} else if (this.getDirection() == 3) {
+								this.setDirection(2);
+							} else if (this.getDirection() == 2) {
+								this.setDirection(1);
+							}
+						} else if (thePieceIAmOn.getDirection() == 1 || thePieceIAmOn.getDirection() == 3) {
+							if (this.getDirection() == 1) {
+								this.setDirection(2);
+							} else if (this.getDirection() == 0) {
+								this.setDirection(1);
+							} else if (this.getDirection() == 3) {
+								this.setDirection(0);
+							} else if (this.getDirection() == 2) {
+								this.setDirection(3);
+							}
+						}
+					}
+				} else {
+					System.out.println("Dead piece");
+				}
+			}
+		} else {
+			System.out.println("OOB ERROR CAUGHT");
+			this.setActive(false);
+		}
+	}
+	
+	public void checkThisTileBenign() {
+		if (this.getRow() >= 0 && this.getColumn() >= 0 && this.getRow() < 8 && this.getColumn() < 10) {
+			if (this.getBoard().getTile(getRow(), getColumn()) != null && this.getBoard().getTile(getRow(), getColumn()).hasAnyPiece()) {
+				Piece thePieceIAmOn = this.getBoard().getTile(this.getBoard().getLaserPosition()[0], this.getBoard().getLaserPosition()[1]).getPiece();
+				if (!(thePieceIAmOn.isDead())) {
+					if (thePieceIAmOn.getType().equals("Deflector")) {
+						if (thePieceIAmOn.getDirection() == 1) {
+							if (this.getDirection() == 2) {
+								((Deflector)(thePieceIAmOn)).setKillSkip(true);
+							} else if (this.getDirection() == 3) {
+								((Deflector)(thePieceIAmOn)).setKillSkip(true);
+							} else {
+								((Deflector)(thePieceIAmOn)).setKillSkip(false);
+								//thePieceIAmOn.dieCheck();
+								//Kill the piece (done in the deflector class)
+							}
+						} else if (thePieceIAmOn.getDirection() == 0) {
+							if (this.getDirection() == 2) {
+								((Deflector)(thePieceIAmOn)).setKillSkip(true);
+							} else if (this.getDirection() == 1) {
+								((Deflector)(thePieceIAmOn)).setKillSkip(true);
+							} else {
+								((Deflector)(thePieceIAmOn)).setKillSkip(false);
+								//thePieceIAmOn.dieCheck();
+								//Kill the piece (done in the deflector class)
+							}
+						} else if (thePieceIAmOn.getDirection() == 2) {
+							if (this.getDirection() == 3) {
+								((Deflector)(thePieceIAmOn)).setKillSkip(true);
+							} else if (this.getDirection() == 0) {
+								((Deflector)(thePieceIAmOn)).setKillSkip(true);
+								System.out.println("Skipping kill");
+							} else {
+								((Deflector)(thePieceIAmOn)).setKillSkip(false);
+								//thePieceIAmOn.dieCheck();
+								//Kill the piece (done in the deflector class)
+							}
+						} else if (thePieceIAmOn.getDirection() == 3) {
+							if (this.getDirection() == 1) {
+								((Deflector)(thePieceIAmOn)).setKillSkip(true);
+							} else if (this.getDirection() == 0) {
+								((Deflector)(thePieceIAmOn)).setKillSkip(true);
+							} else {
+								((Deflector)(thePieceIAmOn)).setKillSkip(false);
+								//thePieceIAmOn.dieCheck();
+								//Kill the piece (done in the deflector class)
+							}
+						}
+					}
+				} else {
+					//System.out.println("Dead piece");
+				}
+			}
+		} else {
+			System.out.println("OOB ERROR CAUGHT");
+			this.setActive(false);
+		}
+	}
+	
 	public int getRow() {
 		return this.row;
+	}
+	
+	private Board getBoard() {
+		return this.board;
 	}
 	
 	public void moveLaser() {
 		if (moveCountDelay > 5) {
 			this.checkNextTile();
 			if (nextMoveLegal) {
+				this.checkThisTile();
 				if (this.getDirection() == 0) {
 					this.setColumn(this.getColumn() + 1);
 				} else if (this.getDirection() == 1) {
@@ -72,6 +225,7 @@ public class LaserBeam {
 				} else if (this.getDirection() == 3) {
 					this.setRow(this.getRow() + 1);
 				}
+				this.checkThisTileBenign();
 			} else {
 				this.setActive(false);
 			}

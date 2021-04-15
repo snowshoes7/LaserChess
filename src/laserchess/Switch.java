@@ -23,4 +23,15 @@ public class Switch extends Piece {
 		toReturn = super.getIcon();
 		return toReturn;
 	}
+	
+	public String getType() {
+		return "Switch";
+	}
+	
+	public void dieCheck() {
+		//Can't die so don't do anything
+		/*if (this.getBoard().getLaserObject().isActive()) {
+			System.out.println("This piece cannot die since it is a LaserCannon");
+		}*/
+	}
 }

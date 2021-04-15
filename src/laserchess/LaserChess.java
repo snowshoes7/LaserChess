@@ -83,8 +83,16 @@ public class LaserChess extends PApplet {
 		blankImage = loadImage("blank.png");
 		
 		//SET UP
-		mainBoard.setTile(new Tile(new LaserCannon(0, 0, 0, "red", mainBoard)), 0, 0);
-		mainBoard.setTile(new Tile(new King(0, 9, 0, "blue", mainBoard)), 0, 9);
+		for (int r = 0; r < mainBoard.getBoard().length; r++) {
+			for (int c = 0; c < mainBoard.getBoard()[0].length; c++) {
+				mainBoard.setTile(new Tile(), r, c);
+			}
+		}
+		
+		mainBoard.setTile(new Tile(new LaserCannon(5, 0, 0, "red", mainBoard)), 5, 0);
+		mainBoard.setTile(new Tile(new King(0, 7, 0, "blue", mainBoard)), 0, 7);
+		mainBoard.setTile(new Tile(new Deflector(5, 9, 2, "blue", mainBoard)), 5, 9);
+		mainBoard.setTile(new Tile(new Switch(3, 9, 0, "blue", mainBoard)), 3, 9);
 	}
 	
 	public void drawBoard() {
@@ -103,17 +111,22 @@ public class LaserChess extends PApplet {
 		text("Laser Chess Demo", 15, 25);
 	}
 	
-	public void drawPieces() {
+	public void drawPieces(boolean drawLaserOnly) {
 		int baseRowLoc = 50;
 		int baseColLoc = 50;
 		for (int row = 0; row < mainBoard.getBoard().length; row++) {
 			for (int col = 0; col < mainBoard.getBoard()[row].length; col++) {
-				if ((mainBoard.getTile(row, col) != null) && (mainBoard.getTile(row, col).hasAnyPiece())) { //null check must go first, otherwise we risk a NullPointerException
-					image(mainBoard.getTile(row, col).getPiece().getIcon(), baseRowLoc + 14, baseColLoc + 5, 75, 60);
-				}
-				if (mainBoard.getLaserObject().isActive() && mainBoard.getLaserPosition()[0] == row && mainBoard.getLaserPosition()[1] == col) {
-					image(mainBoard.getLaserObject().getIcon(), baseRowLoc + 14, baseColLoc + 5, 75, 60);
-					System.out.println("Rendered laser at" + row + " " + col);
+				if (!(drawLaserOnly)) {
+					if ((mainBoard.getTile(row, col) != null) && (mainBoard.getTile(row, col).hasAnyPiece())) { //null check must go first, otherwise we risk a NullPointerException
+						if (!(mainBoard.getTile(row, col).getPiece().isDead())) {
+							image(mainBoard.getTile(row, col).getPiece().getIcon(), baseRowLoc + 14, baseColLoc + 5, 75, 60);
+						}
+					}
+				} else {
+					if (mainBoard.getLaserObject().isActive() && mainBoard.getLaserPosition()[0] == row && mainBoard.getLaserPosition()[1] == col) {
+						image(mainBoard.getLaserObject().getIcon(), baseRowLoc + 14, baseColLoc + 5, 75, 60);
+						//System.out.println("Rendered laser at" + row + " " + col);
+					}
 				}
 				baseRowLoc += 100;
 			}
@@ -126,7 +139,9 @@ public class LaserChess extends PApplet {
 		for (int row = 0; row < mainBoard.getBoard().length; row++) {
 			for (int col = 0; col < mainBoard.getBoard()[row].length; col++) {
 				if ((mainBoard.getTile(row, col) != null) && (mainBoard.getTile(row, col).hasAnyPiece())) { //null check must go first, otherwise we risk a NullPointerException
-					mainBoard.getTile(row, col).getPiece().dieCheck();
+					if (!(mainBoard.getTile(row, col).getPiece().isDead())) {
+						mainBoard.getTile(row, col).getPiece().dieCheck();
+					}
 				}
 			}
 		}
@@ -135,10 +150,11 @@ public class LaserChess extends PApplet {
 	public void draw() {
 		if (mainBoard.isPlayingGame()) {
 			drawBoard();
-			drawPieces();
+			drawPieces(false);
 			if (mainBoard.getLaserObject().isActive()) {
 				mainBoard.getLaserObject().moveLaser();
 			}
+			drawPieces(true);
 			checkDeaths();
 		} else {
 			background(0);
@@ -161,7 +177,7 @@ public class LaserChess extends PApplet {
 		}
 		if (key == 'f') {
 			System.out.println("Fire sent");
-			((LaserCannon)(mainBoard.getTile(0, 0).getPiece())).fire();
+			((LaserCannon)(mainBoard.getTile(5, 0).getPiece())).fire();
 		}
 		if (keyCode == ESC) {
 			System.out.println("Quit with ESC");

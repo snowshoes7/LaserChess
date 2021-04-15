@@ -39,6 +39,10 @@ public class Piece {
 		return this.direction;
 	}
 	
+	public String getType() {
+		return "Piece";
+	}
+	
 	public void setDirection(int d) {
 		this.direction = d;
 	}
@@ -81,6 +85,9 @@ public class Piece {
 	
 	public void setDead(boolean d) {
 		this.isDead = d;
+		if (d == true) {
+			this.board.getLaserObject().setActive(false);
+		}
 	}
 	
 	public void dieCheck() {

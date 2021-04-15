@@ -24,7 +24,11 @@ public class Defender extends Piece {
 		return toReturn;
 	}
 	
+	public String getType() {
+		return "Defender";
+	}
+	
 	public void dieCheck() {
-		
+		super.setDead(true);
 	}
 }

@@ -24,9 +24,15 @@ public class LaserCannon extends Piece {
 		return toReturn;
 	}
 	
+	public String getType() {
+		return "LaserCannon";
+	}
+	
 	public void dieCheck() {
 		//Can't die so don't do anything
-		System.out.println("This piece cannot die since it is a LaserCannon");
+		/*if (this.getBoard().getLaserObject().isActive()) {
+			System.out.println("This piece cannot die since it is a LaserCannon");
+		}*/
 	}
 	
 	public void fire() {
